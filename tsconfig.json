@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "ES2021",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "incremental": true,
+    "rootDirs": ["src"],
+    "baseUrl": "src",
+    "paths": {
+      "@test/*": ["./test/*"],
+      "@/*": ["./src/*"],
+      "@database/*": ["./database/*"],
+    }
+  },
+  "include": ["src/**/*", "test/**/*", "database/**/*"],
+  "exclude": []
+}

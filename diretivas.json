@@ -1,0 +1,148 @@
+{
+  "openmp_version": "5.2",
+  "directives": [
+    {
+      "name": "parallel",
+      "category": "parallelism",
+      "directive_type": "executable",
+      "syntax": "#pragma omp parallel [clause...]",
+      "description": "Defines a parallel region that is executed by a team of threads.",
+      "clauses": [
+        "if",
+        "num_threads",
+        "default",
+        "private",
+        "firstprivate",
+        "shared",
+        "copyin",
+        "reduction",
+        "proc_bind",
+        "allocate"
+      ],
+      "combined_constructs": [
+        "parallel for",
+        "parallel sections",
+        "parallel workshare",
+        "parallel loop",
+        "parallel master",
+        "parallel masked"
+      ],
+      "libgomp_functions": [
+        "GOMP_parallel",
+        "GOMP_parallel_start",
+        "GOMP_parallel_end"
+      ],
+      "gcc_notes": {
+        "minimum_version": "4.2",
+        "offloading_support": false,
+        "gpu_support": false
+      },
+      "example": {
+        "c_cpp": "#pragma omp parallel num_threads(4)\n{\n    printf(\"Thread ID: %d\\n\", omp_get_thread_num());\n}"
+      }
+    },
+    {
+      "name": "for",
+      "category": "work-sharing",
+      "directive_type": "executable",
+      "syntax": "#pragma omp for [clause...]",
+      "description": "Distributes iterations of the associated loop across threads in the team.",
+      "clauses": [
+        "private",
+        "firstprivate",
+        "lastprivate",
+        "reduction",
+        "schedule",
+        "collapse",
+        "ordered",
+        "nowait",
+        "allocate",
+        "linear"
+      ],
+      "combined_constructs": [
+        "parallel for",
+        "for simd",
+        "target parallel for",
+        "distribute parallel for"
+      ],
+      "libgomp_functions": [
+        "GOMP_loop_static_start",
+        "GOMP_loop_dynamic_start",
+        "GOMP_loop_guided_start",
+        "GOMP_loop_runtime_start",
+        "GOMP_loop_ordered_static_start",
+        "GOMP_loop_static_next",
+        "GOMP_loop_end",
+        "GOMP_loop_end_nowait"
+      ],
+      "gcc_notes": {
+        "minimum_version": "4.2",
+        "offloading_support": false,
+        "gpu_support": false
+      },
+      "example": {
+        "c_cpp": "#pragma omp for\nfor(int i = 0; i < 100; i++) {\n    a[i] = b[i] + c[i];\n}"
+      }
+    },
+    {
+      "name": "sections",
+      "category": "work-sharing",
+      "directive_type": "executable",
+      "syntax": "#pragma omp sections [clause...]",
+      "description": "Contains one or more section constructs, each of which is executed once by one thread.",
+      "clauses": [
+        "private",
+        "firstprivate",
+        "lastprivate",
+        "reduction",
+        "nowait",
+        "allocate"
+      ],
+      "combined_constructs": [
+        "parallel sections"
+      ],
+      "libgomp_functions": [
+        "GOMP_sections_start",
+        "GOMP_sections_next",
+        "GOMP_sections_end",
+        "GOMP_sections_end_nowait"
+      ],
+      "gcc_notes": {
+        "minimum_version": "4.2",
+        "offloading_support": false,
+        "gpu_support": false
+      },
+      "example": {
+        "c_cpp": "#pragma omp sections\n{\n    #pragma omp section\n    func1();\n\n    #pragma omp section\n    func2();\n}"
+      }
+    },
+    {
+      "name": "single",
+      "category": "work-sharing",
+      "directive_type": "executable",
+      "syntax": "#pragma omp single [clause...]",
+      "description": "Specifies that the associated block is executed by only one thread in the team.",
+      "clauses": [
+        "private",
+        "firstprivate",
+        "copyprivate",
+        "nowait",
+        "allocate"
+      ],
+      "combined_constructs": [],
+      "libgomp_functions": [
+        "GOMP_single_start",
+        "GOMP_single_copy_start",
+        "GOMP_single_copy_end"
+      ],
+      "gcc_notes": {
+        "minimum_version": "4.2",
+        "offloading_support": false,
+        "gpu_support": false
+      },
+      "example": {
+        "c_cpp": "#pragma omp single\n{\n    printf(\"Executed by one thread\\n\");\n}"
+      }
+    }
+  ]
+}
